@@ -69,12 +69,21 @@
                 const itemStatusList = document.querySelector('#item-status-list');
 
                 if (barcode === "1111") {
-                    resultado.innerText = "pinça";
+                    const items = "Máscaras Cirúrgicas, Aventais Estéreis, Clipes Hemostáticos, Pinças Hemostáticas, Aspiradores Cirúrgicos, Torniquetes, Agulhas de Aspiração, Brocas Ortopédicas, Serrotes Cirúrgicos, Dilatadores, Estiletes Cirúrgicos, Fios de Ligadura, Bandagens, Tubos de Traqueostomia, Monitores de Sinais Vitais".split(',');
+
+                    
+
+                    itemStatusList.innerHTML = '';
+                    items.forEach(item => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = item.trim(); 
+                        itemStatusList.appendChild(listItem);
+                    });
                 } 
                 else if (barcode === "2222") {
                 
-                    const items = "bistori, luva, suturas, fixadores e garras".split(',');
-                    
+                    const items = "Luva, Suturas, Fixadores e Garras, Pinças Cirúrgicas, Tesouras Cirúrgicas, Bisturis, Agulhas, Campos Cirúrgicos, Drenos, Retratores".split(',');
+            
 
                     itemStatusList.innerHTML = '';
                     items.forEach(item => {
