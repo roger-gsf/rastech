@@ -3,16 +3,18 @@ USE rastech;
 
 CREATE TABLE usuarios (
     usuario_id INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_nome varchar(255) not null,
-    usuario_senha varchar(255) not null,
-    usuario_position ENUM('Admin', 'Médico', 'Enfermeiro', 'TécnicoDeEnfermagem', 'Instrumentador') not null
+    usuario_nome VARCHAR(255) NOT NULL,
+    usuario_senha VARCHAR(255) NOT NULL,
+    usuario_position ENUM('Admin', 'Médico', 'Enfermeiro', 
+    'TécnicoDeEnfermagem', 'Instrumentador') NOT NULL
 );
 
 CREATE TABLE itens (
     item_id INT PRIMARY KEY AUTO_INCREMENT,
     item_nome VARCHAR(255) NOT NULL,
     item_empresa VARCHAR(255) NOT NULL, -- Opcional
-    item_status ENUM('Contaminado', 'EmEsterilizacao', 'Esterilizado', 'EmUso', 'Extraviado', 'Danificado') NOT NULL,
+    item_status ENUM('Contaminado', 'EmEsterilizacao', 'Esterilizado', 
+    'EmUso', 'Extraviado', 'Danificado') NOT NULL,
     item_validade_autoclave DATE NOT NULL,
     item_lote_autoclave INT NOT NULL,
     cb_id FOREIGN KEY codigos_de_barras(codigos_de_barras.cb_id),
@@ -32,28 +34,28 @@ CREATE TABLE codigos_de_barras (
 );
 
 CREATE TABLE kits_prontos (
-    kit_id int PRIMARY key AUTO_INCREMENT,
-    kit_procedimento_destinado varchar(255) not null,
-    kit_descricao text
+    kit_id INT PRIMARY KEY AUTO_INCREMENT,
+    kit_procedimento_destinado VARCHAR(255) NOT NULL,
+    kit_descricao TEXT
 );
 
 CREATE TABLE kit_itens (
     kit_itens_id INT PRIMARY KEY AUTO_INCREMENT,
-    kit_id int foreign key kits_prontos(kit_id),
-    kit_id int foreign key itens(item_id)
+    kit_id INT FOREIGN KEY kits_prontos(kit_id),
+    kit_id INT FOREIGN KEY itens(item_id)
 );
 
 CREATE TABLE kit_pedidos_historico (
     pedido_id INT PRIMARY KEY AUTO_INCREMENT,
-    sala_numero INT not null,
-    medico_id INT FOREIGN KEY usuarios(usuario_id) not null,
-    caixa_id INT foreign key caixas(caixa_id) not null,
+    sala_numero INT NOT NULL,
+    medico_id INT FOREIGN KEY usuarios(usuario_id) NOT NULL,
+    caixa_id INT FOREIGN KEY caixas(caixa_id) NOT NULL,
     data_encomenda datetime,
     pedido_entregue boolean
 );
 
 CREATE TABLE adds_pedidos (
-    adicao_id int PRIMARY key AUTO_INCREMENT,
-    pedido_id int foreign key kit_pedidos_historico(pedido_id),
-    item_id int foreign key itens(item_id)
+    adicao_id INT PRIMARY KEY AUTO_INCREMENT,
+    pedido_id INT FOREIGN KEY kit_pedidos_historico(pedido_id),
+    item_id INT FOREIGN KEY itens(item_id)
 );
