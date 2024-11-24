@@ -1,0 +1,146 @@
+body {
+    display: flex;
+    height: 100vh;
+}
+
+.left-section {
+    width: 33.33%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+    width: 80%;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #8ebf95;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.kit-selected {
+    width: 80%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.back-button {
+    width: 80%;
+    padding: 10px;
+    background-color: #ff4040;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    display: none; 
+}
+
+.back-button:hover {
+    background-color: #e60000;
+}
+
+.right-section {
+    width: 66.66%; 
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.search-input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.kit-item {
+    background-color: #fff;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.kit-item h3 {
+    color: #8ebf95;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.kit-item p {
+    color: #555;
+    font-size: 14px;
+}
+
+.form-container {
+    margin-top: 20px;
+    display: none;
+    width: 100%;
+}
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #8ebf95;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.items-added {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.item-added {
+    padding: 8px;
+    background-color: #e0e0e0;
+    margin: 5px 0;
+    border-radius: 4px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .left-section, .right-section {
+        width: 100%; 
+    }
+
+    .right-section {
+        grid-template-columns: 1fr;
+    }
+}

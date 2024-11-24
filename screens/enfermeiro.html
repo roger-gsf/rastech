@@ -1,11 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enfermeiro</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/enfermeiro.css">
+    <script src="/js/enfermeiro.js " defer></script>
 </head>
 <body>
-    <h1>Tela do Enfermeiro</h1>
+
+    <div class="left-section">
+        <div id="kit-selected" class="kit-selected">Nenhum kit selecionado</div>
+        <button id="back-button" class="back-button" onclick="goBack()">Voltar</button> 
+
+        <div class="items-added" id="items-added">
+        </div>
+
+        <div class="form-container" id="form-container">
+            
+            <h3>Agendar Cirurgia</h3>
+            <form id="surgery-form">
+                <input type="date" id="surgery-date" placeholder="Data da Cirurgia" required>
+                <input type="time" id="surgery-time" placeholder="Hora da Cirurgia" required>
+                <input type="text" id="doctor-name" placeholder="Nome do Médico" required>
+                <button type="submit">Agendar Cirurgia</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="right-section">
+        <div class="nav-bar">
+        </div>
+
+        <input type="text" id="search" class="search-input" placeholder="Buscar Cirurgia..." oninput="filterKits()">
+
+        <div id="kits-container">
+  
+            <div class="kit-item" onclick="selectKit('Kit Médico para Cirurgia de Coração')">
+                <h3>Kit Médico para Cirurgia de Coração</h3>
+                <p>Este kit contém todos os itens necessários para realizar uma cirurgia de coração, como bisturi, pinças, suturas e outros materiais específicos.</p>
+            </div>
+
+            <div class="kit-item" onclick="selectKit('Kit Médico para Cirurgia de Apêndice')">
+                <h3>Kit Médico para Cirurgia de Apêndice</h3>
+                <p>Itens essenciais para a remoção do apêndice, incluindo pinças, tesouras, bisturis e suturas específicas para o procedimento.</p>
+            </div>
+
+
+            <div class="kit-item" onclick="selectKit('Kit Médico para Cirurgia de Catarata')">
+                <h3>Kit Médico para Cirurgia de Catarata</h3>
+                <p>Kit especializado para cirurgias oculares, com lupas cirúrgicas, pinças, e outros equipamentos delicados necessários.</p>
+            </div>
+
+            <div class="kit-item" onclick="selectKit('Kit Médico para Cirurgia Ortopédica')">
+                <h3>Kit Médico para Cirurgia Ortopédica</h3>
+                <p>Contém itens para fraturas e procedimentos ortopédicos, como fixadores, garras, e instrumentos específicos para o procedimento.</p>
+            </div>
+
+            <div class="kit-item" onclick="selectKit('Kit Médico para Cirurgia de Cólon')">
+                <h3>Kit Médico para Cirurgia de Cólon</h3>
+                <p>Material cirúrgico necessário para realizar uma cirurgia no cólon, incluindo bisturis, pinças e suturas apropriadas para o procedimento.</p>
+            </div>
+
+            <div class="kit-item" onclick="selectKit('Kit Médico para Cirurgia de Transplante')">
+                <h3>Kit Médico para Cirurgia de Transplante</h3>
+                <p>Itens necessários para um transplante, incluindo ferramentas para corte e preparação do órgão, além de medicamentos imunossupressores.</p>
+            </div>
+        </div>
+    </div>
+
+  
 </body>
 </html>
+
+
+
+
