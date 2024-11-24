@@ -143,28 +143,28 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/', (_, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+  res.sendFile(path.join(__dirname, '.', 'login.html'));
 });
 
-app.get('/index', (_, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+app.get('/login', (_, res) => {
+  res.sendFile(path.join(__dirname, '.', 'login.html'));
 });
 
 // Rotas protegidas para páginas específicas
 app.get('/admin', (_, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+  res.sendFile(path.join(__dirname, 'screens', 'admin.html'));
 });
 app.get('/medico', (_, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'medico.html'));
+  res.sendFile(path.join(__dirname, 'screens', 'medico.html'));
 });
 app.get('/enfermeiro', (_, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'enfermeiro.html'));
+  res.sendFile(path.join(__dirname, 'screens', 'enfermeiro.html'));
 });
 app.get('/tecnico_de_enfermagem', (_, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'tecnico_de_enfermagem.html'));
+  res.sendFile(path.join(__dirname, 'screens', 'tecnico_de_enfermagem.html'));
 });
 app.get('/instrumentador', (_, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'instrumentador.html'));
+  res.sendFile(path.join(__dirname, 'screens', 'instrumentador.html'));
 });
 
 
