@@ -2,7 +2,10 @@ CREATE DATABASE rastech;
 USE rastech;
 
 CREATE TABLE usuarios (
-    usuario_id INT PRIMARY KEY AUTO_INCREMEN
+    usuario_id INT PRIMARY KEY AUTO_INCREMENT,
+    usuario_nome varchar(255) not null,
+    usuario_senha varchar(255) not null,
+    usuario_position ENUM('Admin', 'Médico', 'Enfermeiro', 'TécnicoDeEnfermagem', 'Instrumentador') not null
 );
 
 CREATE TABLE itens (
