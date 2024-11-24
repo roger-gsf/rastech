@@ -5,123 +5,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #00995D;
+            margin: 0;
+            padding: 0;
+            display: block;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        main {
+            background-color: #cf7272;
+            background: #eaeaea;
+            padding: 2rem;
+            border-radius: 8px;
+            align-self: center;
+            justify-self: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 90%;
+        }
+
+        main h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Tela do Administrador</h1>
+    <main>
+        <h1>Tela do Administrador</h1>
+        <section name="register">
+            <h2>Registrar usuário</h2>
+            <form id="registerForm">
+                <label for="usuario_nome">Nome:</label>
+                <input type="text" id="usuario_nome" name="usuario_nome" required>
+                <br><br>
+                <label for="usuario_senha">Senha:</label>
+                <input type="password" id="usuario_senha" name="usuario_senha" required>
+                <br><br>
+                <label for="usuario_cargo">Cargo:</label>
+                <input type="text" id="usuario_cargo" name="usuario_cargo" required>
+                <br><br>
+                <button type="submit">Registrar Usuário</button>
+            </form>
+        </section>
 
-    <!-- Formulário para registrar novo usuário -->
-    <h2>Registrar usuário</h2>
-    <form id="registerForm">
-        <label for="usuario_nome">Nome:</label>
-        <input type="text" id="usuario_nome" name="usuario_nome" required>
-        <br><br>
-        <label for="usuario_senha">Senha:</label>
-        <input type="password" id="usuario_senha" name="usuario_senha" required>
-        <br><br>
-        <label for="usuario_cargo">Cargo:</label>
-        <input type="text" id="usuario_cargo" name="usuario_cargo" required>
-        <br><br>
-        <button type="submit">Registrar Usuário</button>
-    </form>
+        <!-- Mensagens de sucesso ou erro -->
+        <p id="message" style="color: green; display: none;"></p>
+        <p id="error" style="color: red; display: none;"></p>
 
-    <!-- Mensagens de sucesso ou erro -->
-    <p id="message" style="color: green; display: none;"></p>
-    <p id="error" style="color: red; display: none;"></p>
+        <section name="usuarios">
+            <h2>Lista de Usuários</h2>
+            <button id="loadUsers">Carregar Usuários</button>
+            <table border="1" id="userTable" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome do Usuário</th>
+                        <th>Senha</th>
+                        <th>Cargo</th>
+                        <th>Ações</th> <!-- Nova coluna para os botões -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Linhas dos usuários serão inseridas aqui dinamicamente -->
+                </tbody>
+            </table>
 
-    <!-- Botão para carregar usuários e tabela para exibir -->
-    <h2>Lista de Usuários</h2>
-    <button id="loadUsers">Carregar Usuários</button>
-    <table border="1" id="userTable" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome do Usuário</th>
-                <th>Senha</th>
-                <th>Cargo</th>
-                <th>Ações</th> <!-- Nova coluna para os botões -->
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Linhas dos usuários serão inseridas aqui dinamicamente -->
-        </tbody>
-    </table>
+            <!-- Formulário para editar usuário -->
+            <div id="editForm" style="display: none; border: 1px solid #ccc; padding: 20px; margin-top: 20px;">
+                <h2>Editar Usuário</h2>
+                <form id="updateForm">
+                    <!-- Campo apenas para exibir o ID do usuário -->
+                    <label for="edit_usuario_id">ID (não editável):</label>
+                    <input type="text" id="edit_usuario_id" name="usuario_id" disabled>
+                    <br><br>
+                    <label for="edit_usuario_nome">Nome:</label>
+                    <input type="text" id="edit_usuario_nome" name="usuario_nome" required>
+                    <br><br>
+                    <label for="edit_usuario_senha">Senha:</label>
+                    <input type="password" id="edit_usuario_senha" name="usuario_senha" required>
+                    <br><br>
+                    <label for="edit_usuario_cargo">Cargo:</label>
+                    <input type="text" id="edit_usuario_cargo" name="usuario_cargo" required>
+                    <br><br>
+                    <button type="submit">Atualizar Usuário</button>
+                    <button type="button" onclick="hideEditForm()">Cancelar</button>
+                </form>
+            </div>
+            <section>
+                <main>
 
-    <!-- Formulário para editar usuário -->
-    <div id="editForm" style="display: none; border: 1px solid #ccc; padding: 20px; margin-top: 20px;">
-        <h2>Editar Usuário</h2>
-        <form id="updateForm">
-            <!-- Campo apenas para exibir o ID do usuário -->
-            <label for="edit_usuario_id">ID (não editável):</label>
-            <input type="text" id="edit_usuario_id" name="usuario_id" disabled>
-            <br><br>
-            <label for="edit_usuario_nome">Nome:</label>
-            <input type="text" id="edit_usuario_nome" name="usuario_nome" required>
-            <br><br>
-            <label for="edit_usuario_senha">Senha:</label>
-            <input type="password" id="edit_usuario_senha" name="usuario_senha" required>
-            <br><br>
-            <label for="edit_usuario_cargo">Cargo:</label>
-            <input type="text" id="edit_usuario_cargo" name="usuario_cargo" required>
-            <br><br>
-            <button type="submit">Atualizar Usuário</button>
-            <button type="button" onclick="hideEditForm()">Cancelar</button>
-        </form>
-    </div>
+                    <script>
+                        // Registra um novo usuário
+                        document.getElementById('registerForm').addEventListener('submit', async (event) => {
+                            event.preventDefault(); // Evita o comportamento padrão do formulário
 
-    <script>
-        // Registra um novo usuário
-        document.getElementById('registerForm').addEventListener('submit', async (event) => {
-            event.preventDefault(); // Evita o comportamento padrão do formulário
+                            // Obtém os valores do formulário
+                            const usuario_nome = event.target.usuario_nome.value;
+                            const usuario_senha = event.target.usuario_senha.value;
+                            const usuario_cargo = event.target.usuario_cargo.value;
 
-            // Obtém os valores do formulário
-            const usuario_nome = event.target.usuario_nome.value;
-            const usuario_senha = event.target.usuario_senha.value;
-            const usuario_cargo = event.target.usuario_cargo.value;
+                            try {
+                                // Envia os dados para o backend
+                                const response = await fetch('http://localhost:3000/register', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ usuario_nome, usuario_senha, usuario_cargo }),
+                                });
 
-            try {
-                // Envia os dados para o backend
-                const response = await fetch('http://localhost:3000/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ usuario_nome, usuario_senha, usuario_cargo }),
-                });
+                                if (response.ok) {
+                                    const data = await response.json();
+                                    document.getElementById('message').textContent = data.message;
+                                    document.getElementById('message').style.display = 'block';
+                                    document.getElementById('error').style.display = 'none';
+                                } else {
+                                    const error = await response.json();
+                                    document.getElementById('error').textContent = error.message;
+                                    document.getElementById('error').style.display = 'block';
+                                    document.getElementById('message').style.display = 'none';
+                                }
+                            } catch (err) {
+                                console.error('Erro ao registrar usuário:', err);
+                                document.getElementById('error').textContent = 'Erro ao registrar o usuário.';
+                                document.getElementById('error').style.display = 'block';
+                                document.getElementById('message').style.display = 'none';
+                            }
+                        });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    document.getElementById('message').textContent = data.message;
-                    document.getElementById('message').style.display = 'block';
-                    document.getElementById('error').style.display = 'none';
-                } else {
-                    const error = await response.json();
-                    document.getElementById('error').textContent = error.message;
-                    document.getElementById('error').style.display = 'block';
-                    document.getElementById('message').style.display = 'none';
-                }
-            } catch (err) {
-                console.error('Erro ao registrar usuário:', err);
-                document.getElementById('error').textContent = 'Erro ao registrar o usuário.';
-                document.getElementById('error').style.display = 'block';
-                document.getElementById('message').style.display = 'none';
-            }
-        });
+                        // Carrega os usuários ao clicar no botão
+                        document.getElementById('loadUsers').addEventListener('click', async () => {
+                            try {
+                                const response = await fetch('http://localhost:3000/usuarios', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' }
+                                });
 
-        // Carrega os usuários ao clicar no botão
-        document.getElementById('loadUsers').addEventListener('click', async () => {
-            try {
-                const response = await fetch('http://localhost:3000/usuarios', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' }
-                });
+                                if (response.ok) {
+                                    const users = await response.json();
+                                    const userTableBody = document.getElementById('userTable').querySelector('tbody');
+                                    userTableBody.innerHTML = ''; // Limpa a tabela antes de adicionar novos dados
 
-                if (response.ok) {
-                    const users = await response.json();
-                    const userTableBody = document.getElementById('userTable').querySelector('tbody');
-                    userTableBody.innerHTML = ''; // Limpa a tabela antes de adicionar novos dados
-
-                    users.forEach(user => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
+                                    users.forEach(user => {
+                                        const row = document.createElement('tr');
+                                        row.innerHTML = `
                             <td>${user.usuario_id}</td>
                             <td>${user.usuario_nome}</td>
                             <td>${user.usuario_senha}</td>
@@ -131,86 +164,86 @@
                                 <button onclick="deleteUser(${user.usuario_id})">Excluir</button>
                             </td>
                         `;
-                        userTableBody.appendChild(row); // Adiciona a linha na tabela
-                    });
-                } else {
-                    console.error('Erro ao carregar usuários:', response.statusText);
-                }
-            } catch (err) {
-                console.error('Erro ao carregar usuários:', err);
-            }
-        });
+                                        userTableBody.appendChild(row); // Adiciona a linha na tabela
+                                    });
+                                } else {
+                                    console.error('Erro ao carregar usuários:', response.statusText);
+                                }
+                            } catch (err) {
+                                console.error('Erro ao carregar usuários:', err);
+                            }
+                        });
 
-        // Exclui um usuário
-        async function deleteUser(usuario_id) {
-            try {
-                const response = await fetch(`http://localhost:3000/usuarios/${usuario_id}`, {
-                    method: 'DELETE',
-                });
+                        // Exclui um usuário
+                        async function deleteUser(usuario_id) {
+                            try {
+                                const response = await fetch(`http://localhost:3000/usuarios/${usuario_id}`, {
+                                    method: 'DELETE',
+                                });
 
-                if (response.ok) {
-                    alert('Usuário excluído com sucesso.');
-                    document.getElementById('loadUsers').click(); // Recarrega a lista de usuários
-                } else {
-                    const error = await response.json();
-                    alert('Erro ao excluir usuário: ' + error.message);
-                }
-            } catch (err) {
-                console.error('Erro ao excluir usuário:', err);
-            }
-        }
+                                if (response.ok) {
+                                    alert('Usuário excluído com sucesso.');
+                                    document.getElementById('loadUsers').click(); // Recarrega a lista de usuários
+                                } else {
+                                    const error = await response.json();
+                                    alert('Erro ao excluir usuário: ' + error.message);
+                                }
+                            } catch (err) {
+                                console.error('Erro ao excluir usuário:', err);
+                            }
+                        }
 
-        // Edita um usuário
-        function editUser(id, nome, senha, cargo) {
-            // Preenche o formulário com os dados do usuário
-            document.getElementById('edit_usuario_id').value = id; // Apenas para exibir
-            document.getElementById('edit_usuario_nome').value = nome;
-            document.getElementById('edit_usuario_senha').value = senha;
-            document.getElementById('edit_usuario_cargo').value = cargo;
+                        // Edita um usuário
+                        function editUser(id, nome, senha, cargo) {
+                            // Preenche o formulário com os dados do usuário
+                            document.getElementById('edit_usuario_id').value = id; // Apenas para exibir
+                            document.getElementById('edit_usuario_nome').value = nome;
+                            document.getElementById('edit_usuario_senha').value = senha;
+                            document.getElementById('edit_usuario_cargo').value = cargo;
 
-            // Salva o ID do usuário no formulário (como referência)
-            document.getElementById('updateForm').dataset.id = id;
+                            // Salva o ID do usuário no formulário (como referência)
+                            document.getElementById('updateForm').dataset.id = id;
 
-            // Exibe o formulário de edição
-            document.getElementById('editForm').style.display = 'block';
-        }
+                            // Exibe o formulário de edição
+                            document.getElementById('editForm').style.display = 'block';
+                        }
 
-        // Oculta o formulário de edição
-        function hideEditForm() {
-            document.getElementById('editForm').style.display = 'none';
-        }
+                        // Oculta o formulário de edição
+                        function hideEditForm() {
+                            document.getElementById('editForm').style.display = 'none';
+                        }
 
-        // Atualiza os dados de um usuário
-        document.getElementById('updateForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
+                        // Atualiza os dados de um usuário
+                        document.getElementById('updateForm').addEventListener('submit', async (event) => {
+                            event.preventDefault();
 
-            // Obtém os valores do formulário
-            const usuario_id = event.target.dataset.id; // O ID vem do atributo data-id
-            const usuario_nome = document.getElementById('edit_usuario_nome').value;
-            const usuario_senha = document.getElementById('edit_usuario_senha').value;
-            const usuario_cargo = document.getElementById('edit_usuario_cargo').value;
+                            // Obtém os valores do formulário
+                            const usuario_id = event.target.dataset.id; // O ID vem do atributo data-id
+                            const usuario_nome = document.getElementById('edit_usuario_nome').value;
+                            const usuario_senha = document.getElementById('edit_usuario_senha').value;
+                            const usuario_cargo = document.getElementById('edit_usuario_cargo').value;
 
-            try {
-                // Envia os dados atualizados para o backend
-                const response = await fetch(`http://localhost:3000/usuarios/${usuario_id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ usuario_nome, usuario_senha, usuario_cargo }), // Apenas os campos permitidos
-                });
+                            try {
+                                // Envia os dados atualizados para o backend
+                                const response = await fetch(`http://localhost:3000/usuarios/${usuario_id}`, {
+                                    method: 'PUT',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ usuario_nome, usuario_senha, usuario_cargo }), // Apenas os campos permitidos
+                                });
 
-                if (response.ok) {
-                    alert('Usuário atualizado com sucesso.');
-                    hideEditForm(); // Oculta o formulário de edição
-                    document.getElementById('loadUsers').click(); // Recarrega a lista de usuários
-                } else {
-                    const error = await response.json();
-                    alert('Erro ao atualizar usuário: ' + error.message);
-                }
-            } catch (err) {
-                console.error('Erro ao atualizar usuário:', err);
-            }
-        });
-    </script>
+                                if (response.ok) {
+                                    alert('Usuário atualizado com sucesso.');
+                                    hideEditForm(); // Oculta o formulário de edição
+                                    document.getElementById('loadUsers').click(); // Recarrega a lista de usuários
+                                } else {
+                                    const error = await response.json();
+                                    alert('Erro ao atualizar usuário: ' + error.message);
+                                }
+                            } catch (err) {
+                                console.error('Erro ao atualizar usuário:', err);
+                            }
+                        });
+                    </script>
 </body>
 
 </html>

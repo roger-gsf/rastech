@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
+      background-color: #00995D;
       margin: 0;
       padding: 0;
       display: flex;
@@ -18,7 +18,7 @@
     }
 
     .login-container {
-      background: #fff;
+      background: #eaeaea;
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -43,6 +43,7 @@
       padding: 0.8rem;
       margin-bottom: 1.2rem;
       border: 1px solid #ccc;
+      background-color: #efefef;
       border-radius: 4px;
       font-size: 1rem;
     }
@@ -50,8 +51,8 @@
     button {
       width: 100%;
       padding: 0.8rem;
-      background-color: #007bff;
-      color: white;
+      background-color: #008250;
+      color: #cecece;
       border: none;
       border-radius: 4px;
       font-size: 1rem;
@@ -59,7 +60,8 @@
     }
 
     button:hover {
-      background-color: #0056b3;
+      background-color: #007045;
+      transition: 0.75s;
     }
 
     .error-message {
@@ -73,7 +75,7 @@
 </head>
 
 <body>
-  <div class="login-container">
+  <main class="login-container">
     <h1>Login</h1>
     <div id="errorMessage" class="error-message"></div>
     <form id="loginForm">
@@ -85,7 +87,7 @@
 
       <button type="submit">Entrar</button>
     </form>
-  </div>
+  </main>
 
   <script>
 document.getElementById('loginForm').addEventListener('submit', async (event) => {
@@ -106,7 +108,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
     if (!response.ok) {
       // Captura o erro textual caso a resposta não seja válida
       const errorText = await response.text();
-      throw new Error(errorText || 'Erro na solicitação');
+      throw new Error(errorText.message || 'Erro na solicitação');
     }
 
     // Interpreta a resposta JSON
@@ -130,5 +132,4 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 
   </script>
 </body>
-
 </html>
